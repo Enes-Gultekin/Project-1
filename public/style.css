@@ -19,7 +19,7 @@ body {
 }
 .card {
   width: auto;
-  background-color: transparent;
+  background-color: grey;
 }
 
 .radio-inputs {
@@ -191,4 +191,17 @@ body {
   font-weight: 300;
   background-color: transparent;
   border: none;
+}
+svg.bi:nth-child(3) {
+  display: flex;
+  margin: auto 0 0 auto;
+}
+
+#cancel_button {
+  margin: -25px auto -9px 89px;
+  background: transparent;
+  border: none;
+}
+#draw_button {
+  margin: 5px 0px 1px -1px;
 }
