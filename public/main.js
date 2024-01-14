@@ -25,8 +25,7 @@ const draw_layer = new ol.layer.Vector({
   source: draw_source,
 });
 map.addLayer(draw_layer);
-let aa = [];
-let geoExp;
+
 let draw_type;
 function drawVector(vectortype) {
   draw_type = new ol.interaction.Draw({
@@ -40,15 +39,7 @@ function drawVector(vectortype) {
   map.addInteraction(draw_type);
   draw_type.on("drawend", function (event) {
     console.log(event.feature.getGeometry().getCoordinates()[0]);
-    //export to gejson
-    let geojson_export = new ol.format.GeoJSON({
-      geometryName: draw_type,
-    });
-
-    geoExp = geojson_export.writeFeature(event.feature);
-    //expo(geoExp);
-    console.log(event.feature.getGeometry().getCoordinates()[0]);
-    aa.push(event.feature);
+    cancelF();
   });
 }
 
@@ -116,25 +107,5 @@ cancel_button.addEventListener("click", () => {
     radio_elements[i].checked = false;
     draw_source.clear();
   }
+  cancelF();
 });
-
-function expo(geoExp) {
-  var geoJSONString = JSON.stringify(geoExp, null, 2);
-
-  // Create a Blob from the GeoJSON string
-  var blob = new Blob([geoJSONString], { type: "application/json" });
-
-  // Create a download link
-  var downloadLink = document.createElement("a");
-  downloadLink.href = window.URL.createObjectURL(blob);
-  downloadLink.download = "your_geojson_file.geojson";
-
-  // Append the download link to the document
-  document.body.appendChild(downloadLink);
-
-  // Trigger a click on the download link to start the download
-  downloadLink.click();
-
-  // Remove the download link from the document
-  document.body.removeChild(downloadLink);
-}
