@@ -25,7 +25,7 @@ const draw_layer = new ol.layer.Vector({
   source: draw_source,
 });
 map.addLayer(draw_layer);
-
+let aa = [];
 let geoExp;
 let draw_type;
 function drawVector(vectortype) {
@@ -44,8 +44,11 @@ function drawVector(vectortype) {
     let geojson_export = new ol.format.GeoJSON({
       geometryName: draw_type,
     });
+
     geoExp = geojson_export.writeFeature(event.feature);
-    expo(geoExp);
+    //expo(geoExp);
+    console.log(event.feature.getGeometry().getCoordinates()[0]);
+    aa.push(event.feature);
   });
 }
 
